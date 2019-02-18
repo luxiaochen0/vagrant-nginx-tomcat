@@ -78,6 +78,7 @@ Vagrant.configure("2") do |config|
 		end
 		nginx.vm.provision "shell", path: "script_nginx.sh"
 		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.synced_folder "./nginx/htdocs", "/vagrant/nginx",type:"rsync"
 	end
 	
 	config.vm.define "tomcat1" do |tomcat1|
@@ -88,6 +89,7 @@ Vagrant.configure("2") do |config|
 		end
 		tomcat1.vm.provision "shell", path: "script_tomcat.sh"
 		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.synced_folder "./tomcat/htdocs", "/vagrant/tomcat",type:"rsync"
 	end
 	
 	config.vm.define "tomcat2" do |tomcat2|
@@ -98,6 +100,7 @@ Vagrant.configure("2") do |config|
 		end
 		tomcat2.vm.provision "shell", path: "script_tomcat.sh"
 		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.synced_folder "./tomcat/htdocs", "/vagrant/tomcat",type:"rsync"
 	end
 
 end
