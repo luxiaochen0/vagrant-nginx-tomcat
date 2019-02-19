@@ -8,5 +8,7 @@ enabled=1
 gpgkey=https://nginx.org/keys/nginx_signing.key
 EOF
 sudo yum install nginx -y
+sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+sudo ln -s /vagrant/nginx/conf/default.conf /etc/nginx/conf.d/
 sudo systemctl enable nginx.service 
 sudo systemctl start nginx.service

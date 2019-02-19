@@ -69,8 +69,10 @@ Vagrant.configure("2") do |config|
   # SHELL
   
   config.vm.box_check_update = false
+  config.ssh.insert_key = false
   
 	config.vm.define "nginx" do |nginx|
+		#nginx.ssh.password = "123456"
 		nginx.vm.hostname = "nginx"
 		nginx.vm.network "private_network", ip: "192.168.10.11"		
 		nginx.vm.provider :virtualbox do |vb|
@@ -78,10 +80,11 @@ Vagrant.configure("2") do |config|
 		end
 		nginx.vm.provision "shell", path: "script_nginx.sh"
 		nginx.vm.synced_folder ".", "/vagrant", disabled: true
-		nginx.vm.synced_folder "./nginx/htdocs", "/vagrant/nginx",type:"rsync"
+		nginx.vm.synced_folder "./nginx", "/vagrant/nginx",type:"rsync"
 	end
 	
 	config.vm.define "tomcat1" do |tomcat1|
+		#tomcat1.ssh.password = "123456"
 		tomcat1.vm.hostname = "tomcat1"
 		tomcat1.vm.network "private_network", ip: "192.168.10.12"
 		tomcat1.vm.provider :virtualbox do |vb|
@@ -89,10 +92,11 @@ Vagrant.configure("2") do |config|
 		end
 		tomcat1.vm.provision "shell", path: "script_tomcat.sh"
 		tomcat1.vm.synced_folder ".", "/vagrant", disabled: true
-		tomcat1.vm.synced_folder "./tomcat/webapps", "/vagrant/tomcat",type:"rsync"
+		tomcat1.vm.synced_folder "./tomcat", "/vagrant/tomcat",type:"rsync"
 	end
 	
 	config.vm.define "tomcat2" do |tomcat2|
+		#tomcat2.ssh.password = "123456"
 		tomcat2.vm.hostname = "tomcat2"
 		tomcat2.vm.network "private_network", ip: "192.168.10.13"
 		tomcat2.vm.provider :virtualbox do |vb|
@@ -100,7 +104,7 @@ Vagrant.configure("2") do |config|
 		end
 		tomcat2.vm.provision "shell", path: "script_tomcat.sh"
 		tomcat2.vm.synced_folder ".", "/vagrant", disabled: true
-		tomcat2.vm.synced_folder "./tomcat/webapps", "/vagrant/tomcat",type:"rsync"
+		tomcat2.vm.synced_folder "./tomcat", "/vagrant/tomcat",type:"rsync"
 	end
 
 end
